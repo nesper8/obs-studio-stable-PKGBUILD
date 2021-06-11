@@ -1,6 +1,6 @@
 pkgname=obs-studio
 pkgver=27.0.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Free and open source software for video recording and live streaming."
 arch=('x86_64')
 url="https://obsproject.com"
@@ -9,7 +9,7 @@ depends=("ffmpeg" "jansson" "libxinerama" "libxkbcommon-x11" "mbedtls"
          "qt5-svg" "qt5-x11extras" "curl" "jack" "gtk-update-icon-cache" "pipewire")
 makedepends=("cmake" "git" "libfdk-aac" "libxcomposite" "x264"
              "swig" "luajit" "python" "cef-minimal>=87.0.0" "wayland"
-             "qt5-wayland" "pipewire" "xdg-desktop-portal")
+             "qt5-wayland" "xdg-desktop-portal")
 optdepends=("libfdk-aac: FDK AAC codec support"
             "libxcomposite: XComposite capture support"
             "libva-intel-driver: hardware encoding"
@@ -25,7 +25,7 @@ source=("$pkgname-$pkgver.tar.gz::https://github.com/obsproject/obs-studio/archi
         "git+https://github.com/obsproject/obs-browser.git"
         "git+https://github.com/obsproject/obs-vst.git"
         "fix_python_binary_loading.patch::https://raw.githubusercontent.com/archlinux/svntogit-community/packages/obs-studio/trunk/fix_python_binary_loading.patch")
-md5sums=("SKIP" "SKIP" "SKIP" "SKIP" "SKIP")
+md5sums=("cd3da7551dc4a007c6b01145d037b910" "SKIP" "SKIP" "SKIP" "051b90f05e26bff99236b8fb1ad377d1")
 
 prepare() {
   cd $pkgname-$pkgver
@@ -47,9 +47,10 @@ build() {
     -DBUILD_BROWSER=ON \
     -DDISABLE_VLC=ON \
     -DCEF_ROOT_DIR="/opt/cef" \
-    -DOBS_VERSION_OVERRIDE="$pkgver-$pkgrel" ..
+    -DOBS_VERSION_OVERRIDE="$pkgver-$pkgrel" .. \
+    -DENABLE_PIPEWIRE=ON
 
-  make -j4
+  make
 }
 
 package() {
@@ -58,4 +59,3 @@ package() {
   make install DESTDIR="$pkgdir"
 }
 
-# vim: ts=2:sw=2:expandtab
