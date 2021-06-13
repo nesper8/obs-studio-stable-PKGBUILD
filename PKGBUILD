@@ -1,6 +1,6 @@
 pkgname=obs-studio
 pkgver=27.0.0
-pkgrel=4
+pkgrel=6
 pkgdesc="Free and open source software for video recording and live streaming."
 arch=('x86_64')
 url="https://obsproject.com"
@@ -42,6 +42,7 @@ build() {
   mkdir -p build; cd build
 
   cmake \
+    -DUNIX_STRUCTURE=1 \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DBUILD_BROWSER=ON \
