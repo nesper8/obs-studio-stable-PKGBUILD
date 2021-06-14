@@ -1,6 +1,6 @@
 pkgname=obs-studio
-pkgver=27.0.0
-pkgrel=6
+pkgver=27.0.1
+pkgrel=7
 pkgdesc="Free and open source software for video recording and live streaming."
 arch=('x86_64')
 url="https://obsproject.com"
@@ -25,7 +25,7 @@ source=("$pkgname-$pkgver.tar.gz::https://github.com/obsproject/obs-studio/archi
         "git+https://github.com/obsproject/obs-browser.git"
         "git+https://github.com/obsproject/obs-vst.git"
         "fix_python_binary_loading.patch::https://raw.githubusercontent.com/archlinux/svntogit-community/packages/obs-studio/trunk/fix_python_binary_loading.patch")
-md5sums=("cd3da7551dc4a007c6b01145d037b910" "SKIP" "SKIP" "SKIP" "051b90f05e26bff99236b8fb1ad377d1")
+md5sums=("48b51f558858f512928efda0f3aee1a1" "SKIP" "SKIP" "SKIP" "051b90f05e26bff99236b8fb1ad377d1")
 
 prepare() {
   cd $pkgname-$pkgver
@@ -51,7 +51,7 @@ build() {
     -DOBS_VERSION_OVERRIDE="$pkgver-$pkgrel" .. \
     -DENABLE_PIPEWIRE=ON
 
-  make
+  make -j4
 }
 
 package() {
