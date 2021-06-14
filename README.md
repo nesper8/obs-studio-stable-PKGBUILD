@@ -7,10 +7,11 @@ Omit this flag to re-enable it
 ```
 -DDISABLE_VLC=ON \
 ```
+### Build Dependancies
+* cef-minimal (Browser Extension)
 
 ### Additional Dependancies
 * Pipewire (Wayland Support)
-* cef-minimal (Browser Extension)
 
 ### Additional Notes
 Please do note that I'm only hosting my PKGBUILD (which is ultimately just a build script for Arch OS) and the precompiled versions of OBS using my PKGBUILD
